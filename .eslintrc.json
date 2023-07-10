@@ -1,0 +1,38 @@
+{
+  "root": true,
+  "env": { "react-native/react-native": true },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-native/all",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react", "react-native"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": true
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always"
+      }
+    ]
+  }
+}
