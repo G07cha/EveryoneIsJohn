@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
 import { it } from '@jest/globals';
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 
 import App from '../src/App';
 
