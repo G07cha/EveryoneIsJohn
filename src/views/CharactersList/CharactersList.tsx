@@ -1,13 +1,28 @@
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
+import { FlatList, Text, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 
 import { useGlobalStore } from '../../modules/store';
+import { StackParamList } from '../../App';
+import { Icon } from '../../components/Icon';
+import { SafeView } from '../../components/SafeView';
 
-export const CharactersListView = () => {
+type Props = NativeStackScreenProps<StackParamList, 'Characters'>;
+
+export const CharactersListView = ({ navigation }: Props) => {
+  const { t } = useTranslation();
   const characters = useGlobalStore.use.characters();
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: t('Characters'),
+      headerRight: () => <Icon name="plus" />,
+    });
+  }, []);
+
   return (
-    <View>
+    <SafeView>
       <FlatList
         data={characters}
         renderItem={({ item }) => (
@@ -16,6 +31,6 @@ export const CharactersListView = () => {
           </TouchableOpacity>
         )}
       />
-    </View>
+    </SafeView>
   );
 };

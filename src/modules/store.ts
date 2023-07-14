@@ -5,13 +5,15 @@ import { create } from 'zustand';
 import { createSelectors } from '../helpers/store';
 
 import { CharactersSlice, createCharacterStoreSlice } from './Character';
+import { SettingsSlice, createSettingsSlice } from './Settings';
 
-export type GlobalStoreState = CharactersSlice;
+export type GlobalStoreState = CharactersSlice & SettingsSlice;
 
 const useGlobalStoreBase = create<GlobalStoreState>()(
   persist(
     (...args) => ({
       ...createCharacterStoreSlice(...args),
+      ...createSettingsSlice(...args),
     }),
     {
       name: 'global-store',

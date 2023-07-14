@@ -1,19 +1,33 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useTranslation } from 'react-i18next';
 
 import { CharactersListView } from './views/CharactersList';
+import { useTheme } from './helpers/use-theme';
 
-const Stack = createNativeStackNavigator();
+export type StackParamList = {
+  Characters: undefined;
+};
+
+const Stack = createNativeStackNavigator<StackParamList>();
 
 function App(): JSX.Element {
-  const { t } = useTranslation();
+  const theme = useTheme();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name={t('Characters')} component={CharactersListView} />
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: theme.palette.primary,
+          },
+          headerTintColor: theme.palette.secondary,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        <Stack.Screen name="Characters" component={CharactersListView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
