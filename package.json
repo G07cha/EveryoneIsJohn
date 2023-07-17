@@ -11,7 +11,8 @@
     "format": "prettier --write --list-different .",
     "format:check": "prettier --check .",
     "prepare": "husky install",
-    "generate-icons": "react-native-vector-image generate"
+    "generate-icons": "react-native-vector-image generate",
+    "i18n-extract": "NODE_ENV=development babel -f .babelrc 'src/**/*.{js,jsx,ts,tsx}' > /dev/null"
   },
   "dependencies": {
     "@klarna/react-native-vector-drawable": "^0.4.0",
@@ -29,6 +30,7 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
+    "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
     "@babel/preset-typescript": "^7.22.5",
@@ -41,6 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "babel-jest": "^29.6.1",
+    "babel-plugin-i18next-extract": "^0.9.0",
     "eslint": "^8.44.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
