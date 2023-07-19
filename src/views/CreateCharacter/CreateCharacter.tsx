@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Button, Text } from 'react-native';
-import { useFormik } from 'formik';
+import { FormikErrors, useFormik } from 'formik';
 
 import { SafeView } from '../../components/SafeView';
 import { ViewProps } from '../../navigation';
@@ -14,7 +14,7 @@ type Props = ViewProps<'CreateCharacter'>;
 export const CreateCharacterView = ({ navigation }: Props) => {
   const { t } = useTranslation();
   const addCharacter = useGlobalStore.use.addCharacter();
-  const { dirty, handleBlur, handleChange, handleSubmit, values } = useFormik<Character>({
+  const { dirty, handleBlur, handleChange, handleSubmit, values, errors } = useFormik<Character>({
     initialValues: {
       name: '',
       obsessions: ['', '', ''],
@@ -26,6 +26,15 @@ export const CreateCharacterView = ({ navigation }: Props) => {
       addCharacter(character);
 
       navigation.navigate('Characters');
+    },
+    validate: (values) => {
+      const errors: FormikErrors<Character> = {};
+
+      if (!values.name) {
+        errors.name = t('Name required error');
+      }
+
+      return errors;
     },
   });
 
@@ -57,6 +66,7 @@ export const CreateCharacterView = ({ navigation }: Props) => {
         onChangeText={handleChange('name')}
         onBlur={handleBlur('name')}
         value={values.name}
+        error={errors.name}
       />
       <Text>{t('Skills')}:</Text>
       <TextInput

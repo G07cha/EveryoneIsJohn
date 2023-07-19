@@ -1,20 +1,18 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useMemo } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const SafeView = ({ children }: PropsWithChildren<unknown>) => {
   const insets = useSafeAreaInsets();
-
-  return (
-    <View
-      style={{
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
-        paddingLeft: insets.left,
-        paddingRight: insets.right,
-      }}
-    >
-      {children}
-    </View>
+  const style = useMemo(
+    () => ({
+      paddingTop: insets.top,
+      paddingBottom: insets.bottom,
+      paddingLeft: insets.left,
+      paddingRight: insets.right,
+    }),
+    [insets],
   );
+
+  return <View style={style}>{children}</View>;
 };

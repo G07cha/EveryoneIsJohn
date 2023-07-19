@@ -1,8 +1,19 @@
 import React from 'react';
-import { TextInput as TextInputBase, TextInputProps as TextInputBaseProps } from 'react-native';
+import { Text, TextInput as TextInputBase, TextInputProps as TextInputBaseProps } from 'react-native';
 
-type TextInputProps = TextInputBaseProps;
+import { useTheme } from '../../helpers/use-theme';
 
-export const TextInput = (props: TextInputProps) => {
-  return <TextInputBase {...props} />;
+type TextInputProps = TextInputBaseProps & {
+  error?: string;
+};
+
+export const TextInput = ({ error, ...rest }: TextInputProps) => {
+  const theme = useTheme();
+
+  return (
+    <>
+      <TextInputBase {...rest} />
+      {error ? <Text style={{ color: theme.palette.error }}>{error}</Text> : null}
+    </>
+  );
 };
