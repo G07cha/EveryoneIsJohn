@@ -1,14 +1,14 @@
 {
   "Characters": "Karakters",
-  "First obsession": "",
-  "First skill": "",
+  "First obsession": "Eerste obsessie",
+  "First skill": "Eerste vaardigheid",
   "Name": "Naam",
   "New character": "Nieuw karakter",
-  "Obsessions": "",
-  "Second obsession": "",
-  "Second skill": "",
-  "Skills": "",
-  "Third obsession": "",
-  "Third skill (optional)": "",
-  "Third skill willpower tip": ""
+  "Obsessions": "Obsessies",
+  "Second obsession": "Tweede obsessie",
+  "Second skill": "Tweede vaardigheid",
+  "Skills": "Vaardigheieden",
+  "Third obsession": "Derde obsessie",
+  "Third skill (optional)": "Derde vaardigheid (optionele)",
+  "Third skill willpower tip": "Tip: als je 3 vaardigheden gebruikt, begint je karakter met 3 wilskracht minder"
 }

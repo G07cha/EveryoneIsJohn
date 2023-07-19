@@ -2,7 +2,8 @@ import React from 'react';
 import VectorImage from 'react-native-vector-image';
 
 const ICON_FILES = {
-  plus: require(`../../assets/icons/plus.svg`),
+  plus: require('../../assets/icons/plus.svg'),
+  chevronLeft: require('../../assets/icons/chevron-left.svg'),
 };
 
 export interface Props {

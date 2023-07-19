@@ -11,14 +11,15 @@
     "format": "prettier --write --list-different .",
     "format:check": "prettier --check .",
     "prepare": "husky install",
-    "generate-icons": "react-native-vector-image generate",
-    "i18n-extract": "NODE_ENV=development babel -f .babelrc 'src/**/*.{js,jsx,ts,tsx}' > /dev/null"
+    "generate:icons": "react-native-vector-image generate",
+    "generate:translations": "NODE_ENV=development babel -f .babelrc 'src/**/*.{js,jsx,ts,tsx}' > /dev/null"
   },
   "dependencies": {
     "@klarna/react-native-vector-drawable": "^0.4.0",
     "@react-native-async-storage/async-storage": "^1.19.0",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
+    "formik": "^2.4.2",
     "i18next": "^23.2.11",
     "intl-pluralrules": "^2.0.1",
     "react": "18.2.0",

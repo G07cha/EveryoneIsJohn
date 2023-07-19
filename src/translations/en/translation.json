@@ -1,14 +1,14 @@
 {
   "Characters": "Characters",
-  "First obsession": "",
+  "First obsession": "First obsession",
   "First skill": "First skill",
   "Name": "Name",
   "New character": "New character",
-  "Obsessions": "",
-  "Second obsession": "",
+  "Obsessions": "Obsessions",
+  "Second obsession": "Second obsession",
   "Second skill": "Second skill",
-  "Skills": "",
-  "Third obsession": "",
+  "Skills": "Skills",
+  "Third obsession": "Third obsession",
   "Third skill (optional)": "Third skill (optional)",
-  "Third skill willpower tip": ""
+  "Third skill willpower tip": "Tip: when using 3 skills character starts with 3 less willpower"
 }
