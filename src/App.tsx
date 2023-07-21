@@ -9,10 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 
 import { CharactersListView } from './views/CharactersList';
-import { useTheme } from './helpers/use-theme';
+import { CharacterView } from './views/Character';
 import { CreateCharacterView } from './views/CreateCharacter';
-import { StackParamList } from './navigation';
 import { Icon } from './components/Icon';
+import { StackParamList } from './navigation';
+import { useTheme } from './helpers/use-theme';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -48,9 +49,9 @@ function App(): JSX.Element {
           component={CreateCharacterView}
           options={{
             title: t('New character'),
-            headerBackTitleVisible: false,
           }}
         />
+        <Stack.Screen name="Character" component={CharacterView} options={{ title: '' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

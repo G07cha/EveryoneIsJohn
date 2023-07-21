@@ -11,5 +11,8 @@
   "Skills": "Vaardigheieden",
   "Third obsession": "Derde obsessie",
   "Third skill (optional)": "Derde vaardigheid (optionele)",
-  "Third skill willpower tip": "Tip: als je 3 vaardigheden gebruikt, begint je karakter met 3 wilskracht minder"
+  "Third skill willpower tip": "Tip: als je 3 vaardigheden gebruikt, begint je karakter met 3 wilskracht minder",
+  "Willpower": "Wilskracht",
+  "point_one": "{{count}} punt",
+  "point_other": "{{count}} punten"
 }

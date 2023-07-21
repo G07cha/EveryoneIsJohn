@@ -1,10 +1,10 @@
 import React, { PropsWithChildren, useMemo } from 'react';
-import { View } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const SafeView = ({ children }: PropsWithChildren<unknown>) => {
   const insets = useSafeAreaInsets();
-  const style = useMemo(
+  const style = useMemo<StyleProp<ViewStyle>>(
     () => ({
       paddingTop: insets.top,
       paddingBottom: insets.bottom,

@@ -1,5 +1,5 @@
 import { FlatList, Text, TouchableOpacity } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useGlobalStore } from '../../modules/store';
@@ -9,9 +9,12 @@ import { ViewProps } from '../../navigation';
 
 type Props = ViewProps<'Characters'>;
 
+export type CharactersListViewParams = undefined;
+
 export const CharactersListView = ({ navigation }: Props) => {
   const { t } = useTranslation();
   const characters = useGlobalStore.use.characters();
+  const listData = useMemo(() => Array.from(characters.values()).reverse(), [characters]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -22,15 +25,15 @@ export const CharactersListView = ({ navigation }: Props) => {
         </TouchableOpacity>
       ),
     });
-  }, []);
+  }, [navigation, t]);
 
   return (
     <SafeView>
       <FlatList
-        data={characters}
-        renderItem={({ item }) => (
-          <TouchableOpacity>
-            <Text>{item.name}</Text>
+        data={listData}
+        renderItem={({ item: character }) => (
+          <TouchableOpacity onPress={() => navigation.navigate('Character', { characterId: character.id })}>
+            <Text>{character.name}</Text>
           </TouchableOpacity>
         )}
       />

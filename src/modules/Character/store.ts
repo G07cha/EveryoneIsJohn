@@ -2,13 +2,16 @@ import { StateCreator } from 'zustand';
 import 'zustand/middleware';
 
 import { GlobalStoreState } from '../store';
+import { generateId } from '../../helpers/id';
+import { toBranded } from '../../helpers/branded';
 
 import { Character } from './types';
 
 export interface CharactersSlice {
-  characters: readonly Character[];
-  addCharacter(character: Character): void;
-  removeCharacter(index: number): void;
+  characters: Map<Character['id'], Character>;
+  addCharacter(character: Omit<Character, 'id'>): void;
+  removeCharacter(id: Character['id']): void;
+  updateCharacter(character: Character): void;
 }
 
 const DEFAULT_STARTING_WILLPOWER = 10;
@@ -19,19 +22,29 @@ export const createCharacterStoreSlice: StateCreator<
   [['zustand/persist', unknown]],
   [],
   CharactersSlice
-> = (set, get) => ({
-  characters: [],
-  addCharacter: (character) =>
-    set({
-      characters: [
-        {
-          ...character,
-          score: 0,
-          willpower:
-            character.skills.filter(Boolean).length < 3 ? DEFAULT_STARTING_WILLPOWER : REDUCED_STARTING_WILLPOWER,
-        },
-        ...get().characters,
-      ],
+> = (setState) => ({
+  characters: new Map(),
+  addCharacter: (character) => {
+    const id = toBranded<Character['id']>(generateId());
+
+    setState((prev) => ({
+      characters: new Map(prev.characters).set(id, {
+        ...character,
+        id,
+        score: 0,
+        willpower:
+          character.skills.filter(Boolean).length < 3 ? DEFAULT_STARTING_WILLPOWER : REDUCED_STARTING_WILLPOWER,
+      }),
+    }));
+  },
+  removeCharacter: (id: Character['id']) =>
+    setState((prev) => {
+      const characters = new Map(prev.characters);
+      characters.delete(id);
+      return { characters };
     }),
-  removeCharacter: (index) => set({ characters: [...get().characters.filter((_, i) => i !== index)] }),
+  updateCharacter: (character) =>
+    setState((prev) => ({
+      characters: new Map(prev.characters).set(character.id, character),
+    })),
 });

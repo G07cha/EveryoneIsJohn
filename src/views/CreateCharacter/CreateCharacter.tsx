@@ -11,10 +11,12 @@ import { Character } from '../../modules/Character';
 
 type Props = ViewProps<'CreateCharacter'>;
 
+export type CreateCharacterViewParams = undefined;
+
 export const CreateCharacterView = ({ navigation }: Props) => {
   const { t } = useTranslation();
   const addCharacter = useGlobalStore.use.addCharacter();
-  const { dirty, handleBlur, handleChange, handleSubmit, values, errors } = useFormik<Character>({
+  const { dirty, handleBlur, handleChange, handleSubmit, values, errors } = useFormik<Omit<Character, 'id'>>({
     initialValues: {
       name: '',
       obsessions: ['', '', ''],
@@ -22,7 +24,7 @@ export const CreateCharacterView = ({ navigation }: Props) => {
       skills: ['', '', ''],
       willpower: 0,
     },
-    onSubmit: (character: Character) => {
+    onSubmit: (character) => {
       addCharacter(character);
 
       navigation.navigate('Characters');
@@ -57,7 +59,7 @@ export const CreateCharacterView = ({ navigation }: Props) => {
         },
       ]);
     });
-  }, [navigation]);
+  }, [dirty, navigation]);
 
   return (
     <SafeView>
