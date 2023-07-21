@@ -1,4 +1,4 @@
-import { Button, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -27,8 +27,8 @@ export const CharacterView = ({ navigation, route }: Props) => {
     navigation.setOptions({
       title: character.name,
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('CreateCharacter')}>
-          <Icon name="plus" />
+        <TouchableOpacity onPress={() => navigation.navigate('EditCharacter', { characterId: character.id })}>
+          <Icon name="pencil" />
         </TouchableOpacity>
       ),
     });
@@ -64,7 +64,7 @@ export const CharacterView = ({ navigation, route }: Props) => {
 
       updateCharacter({
         ...character,
-        score: character.score - (obsessionIndex + 1),
+        score: character.score + obsessionIndex + 1,
       });
     },
     [character, updateCharacter],
@@ -78,9 +78,13 @@ export const CharacterView = ({ navigation, route }: Props) => {
   return (
     <SafeView>
       <Text>{t('Willpower')}</Text>
-      <Button title="-" onPress={decreaseWillpower} disabled={character.willpower <= 0} />
+      <TouchableOpacity onPress={decreaseWillpower}>
+        <Icon name="minus" />
+      </TouchableOpacity>
       <Text>{character.willpower}</Text>
-      <Button title="+" onPress={increaseWillpower} />
+      <TouchableOpacity onPress={increaseWillpower}>
+        <Icon name="plus" />
+      </TouchableOpacity>
       <Text>{t('Skills')}:</Text>
       {character.skills.map((skill, index) => (
         <Text key={index}>{skill}</Text>

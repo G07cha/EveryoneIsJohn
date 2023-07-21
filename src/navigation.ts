@@ -3,11 +3,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { CharacterViewParams } from './views/Character';
 import { CharactersListViewParams } from './views/CharactersList';
 import { CreateCharacterViewParams } from './views/CreateCharacter';
+import { EditCharacterViewParams } from './views/EditCharacter';
 
 export type StackParamList = {
   Characters: CharactersListViewParams;
   CreateCharacter: CreateCharacterViewParams;
   Character: CharacterViewParams;
+  EditCharacter: EditCharacterViewParams;
 };
 
 export type ViewProps<Screen extends keyof StackParamList> = NativeStackScreenProps<StackParamList, Screen>;

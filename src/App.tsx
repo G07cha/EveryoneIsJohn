@@ -14,6 +14,7 @@ import { CreateCharacterView } from './views/CreateCharacter';
 import { Icon } from './components/Icon';
 import { StackParamList } from './navigation';
 import { useTheme } from './helpers/use-theme';
+import { EditCharacterView } from './views/EditCharacter';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -52,6 +53,7 @@ function App(): JSX.Element {
           }}
         />
         <Stack.Screen name="Character" component={CharacterView} options={{ title: '' }} />
+        <Stack.Screen name="EditCharacter" component={EditCharacterView} options={{ title: '' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
