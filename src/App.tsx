@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { CharactersListView } from './views/CharactersList';
 import { CharacterView } from './views/Character';
@@ -42,20 +43,22 @@ function App(): JSX.Element {
   );
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={screenOptions}>
-        <Stack.Screen name="Characters" component={CharactersListView} />
-        <Stack.Screen
-          name="CreateCharacter"
-          component={CreateCharacterView}
-          options={{
-            title: t('New character'),
-          }}
-        />
-        <Stack.Screen name="Character" component={CharacterView} options={{ title: '' }} />
-        <Stack.Screen name="EditCharacter" component={EditCharacterView} options={{ title: '' }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={screenOptions}>
+          <Stack.Screen name="Characters" component={CharactersListView} />
+          <Stack.Screen
+            name="CreateCharacter"
+            component={CreateCharacterView}
+            options={{
+              title: t('New character'),
+            }}
+          />
+          <Stack.Screen name="Character" component={CharacterView} options={{ title: '' }} />
+          <Stack.Screen name="EditCharacter" component={EditCharacterView} options={{ title: '' }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
