@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 
 import { Icon } from '../../components/Icon';
 import { SafeView } from '../../components/SafeView';
-import { ViewProps } from '../../navigation';
+import { StackViewProps } from '../../navigation';
 import { Character } from '../../modules/Character';
 import { useGlobalStore } from '../../modules/store';
 
-type Props = ViewProps<'Character'>;
+type Props = StackViewProps<'Character'>;
 
 export type CharacterViewParams = { characterId: Character['id'] };
 

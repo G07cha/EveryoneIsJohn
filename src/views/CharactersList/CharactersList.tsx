@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../../modules/store';
 import { Icon } from '../../components/Icon';
 import { SafeView } from '../../components/SafeView';
-import { ViewProps } from '../../navigation';
+import { StackViewProps } from '../../navigation';
 
-type Props = ViewProps<'Characters'>;
+type Props = StackViewProps<'Characters'>;
 
 export type CharactersListViewParams = undefined;
 

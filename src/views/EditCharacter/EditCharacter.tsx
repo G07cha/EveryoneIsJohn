@@ -4,13 +4,13 @@ import { Alert, Button, Text, TouchableOpacity } from 'react-native';
 import { useFormik } from 'formik';
 
 import { SafeView } from '../../components/SafeView';
-import { ViewProps } from '../../navigation';
+import { StackViewProps } from '../../navigation';
 import { TextInput } from '../../components/TextInput';
 import { useGlobalStore } from '../../modules/store';
 import { Character } from '../../modules/Character';
 import { Icon } from '../../components/Icon';
 
-type Props = ViewProps<'EditCharacter'>;
+type Props = StackViewProps<'EditCharacter'>;
 
 export type EditCharacterViewParams = { characterId: Character['id'] };
 

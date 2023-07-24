@@ -14,14 +14,17 @@ import { CharacterView } from './views/Character';
 import { CreateCharacterView } from './views/CreateCharacter';
 import { Icon } from './components/Icon';
 import { StackParamList } from './navigation';
-import { useTheme } from './helpers/use-theme';
 import { EditCharacterView } from './views/EditCharacter';
+import { useGlobalStore } from './modules/store';
+import { IntroView } from './views/Intro';
+import { theme } from './theme';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
 function App(): JSX.Element {
-  const theme = useTheme();
   const { t } = useTranslation();
+  const hasCharacters = useGlobalStore.use.characters().size > 0;
+
   const screenOptions = useCallback(
     ({ navigation }: NativeStackScreenProps<StackParamList>): NativeStackNavigationOptions => ({
       headerLeft: ({ canGoBack }) => {
@@ -39,13 +42,16 @@ function App(): JSX.Element {
         fontWeight: 'bold',
       },
     }),
-    [theme],
+    [],
   );
 
   return (
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={screenOptions}>
+          {hasCharacters === false && (
+            <Stack.Screen name="Intro" component={IntroView} options={{ headerShown: false }} />
+          )}
           <Stack.Screen name="Characters" component={CharactersListView} />
           <Stack.Screen
             name="CreateCharacter"

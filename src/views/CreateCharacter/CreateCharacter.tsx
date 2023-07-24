@@ -4,12 +4,12 @@ import { Alert, Button, Text } from 'react-native';
 import { FormikErrors, useFormik } from 'formik';
 
 import { SafeView } from '../../components/SafeView';
-import { ViewProps } from '../../navigation';
+import { StackViewProps } from '../../navigation';
 import { TextInput } from '../../components/TextInput';
 import { useGlobalStore } from '../../modules/store';
 import { Character } from '../../modules/Character';
 
-type Props = ViewProps<'CreateCharacter'>;
+type Props = StackViewProps<'CreateCharacter'>;
 
 export type CreateCharacterViewParams = undefined;
 
@@ -27,7 +27,11 @@ export const CreateCharacterView = ({ navigation }: Props) => {
     onSubmit: (character) => {
       addCharacter(character);
 
-      navigation.navigate('Characters');
+      // Resetting state to prevent user from going back
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Characters' }],
+      });
     },
     validate: (values) => {
       const errors: FormikErrors<Character> = {};

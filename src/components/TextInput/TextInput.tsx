@@ -1,19 +1,23 @@
 import React from 'react';
-import { Text, TextInput as TextInputBase, TextInputProps as TextInputBaseProps } from 'react-native';
+import { StyleSheet, Text, TextInput as TextInputBase, TextInputProps as TextInputBaseProps } from 'react-native';
 
-import { useTheme } from '../../helpers/use-theme';
+import { theme } from '../../theme';
 
 type TextInputProps = TextInputBaseProps & {
   error?: string;
 };
 
 export const TextInput = ({ error, ...rest }: TextInputProps) => {
-  const theme = useTheme();
-
   return (
     <>
       <TextInputBase {...rest} />
-      {error ? <Text style={{ color: theme.palette.error }}>{error}</Text> : null}
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  errorText: {
+    color: theme.palette.error,
+  },
+});
