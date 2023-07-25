@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -8,6 +8,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import RNBootSplash from 'react-native-bootsplash';
 
 import { CharactersListView } from './views/CharactersList';
 import { CharacterView } from './views/Character';
@@ -24,6 +25,8 @@ const Stack = createNativeStackNavigator<StackParamList>();
 function App(): JSX.Element {
   const { t } = useTranslation();
   const hasCharacters = useGlobalStore.use.characters().size > 0;
+
+  useEffect(() => useGlobalStore.persist.onFinishHydration(() => RNBootSplash.hide({ fade: true, duration: 500 })), []);
 
   const screenOptions = useCallback(
     ({ navigation }: NativeStackScreenProps<StackParamList>): NativeStackNavigationOptions => ({

@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { SafeView } from '../../components/SafeView';
 import { Image } from '../../components/Image';
 import { Button } from '../../components/Button';
 import { theme } from '../../theme';
@@ -24,11 +23,11 @@ export const IntroView = ({ navigation }: Props) => {
   }, [navigation]);
 
   return (
-    <SafeView style={styles.container}>
+    <View style={styles.container}>
       <Image name="logo" style={styles.logo} />
       <Button title={t('Create first character')} onPress={onCreateCharacterRequest} />
       <Image name="characterArt" style={styles.characterArt} />
-    </SafeView>
+    </View>
   );
 };
 
