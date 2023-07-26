@@ -27,7 +27,10 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
     navigation.setOptions({
       title: character.name,
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('EditCharacter', { characterId: character.id })}>
+        <TouchableOpacity
+          testID="edit_character_button"
+          onPress={() => navigation.navigate('EditCharacter', { characterId: character.id })}
+        >
           <Icon name="pencil" />
         </TouchableOpacity>
       ),
@@ -76,7 +79,7 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
   }
 
   return (
-    <SafeView>
+    <SafeView testID="character_view">
       <Text>{t('Willpower')}</Text>
       <TouchableOpacity onPress={decreaseWillpower}>
         <Icon name="minus" />

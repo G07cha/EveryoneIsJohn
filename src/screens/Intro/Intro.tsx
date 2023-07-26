@@ -23,9 +23,9 @@ export const IntroScreen = ({ navigation }: Props) => {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="intro_view">
       <Image name="logo" style={styles.logo} />
-      <Button title={t('Create first character')} onPress={onCreateCharacterRequest} />
+      <Button testID="create_character_button" title={t('Create first character')} onPress={onCreateCharacterRequest} />
       <Image name="characterArt" style={styles.characterArt} />
     </View>
   );

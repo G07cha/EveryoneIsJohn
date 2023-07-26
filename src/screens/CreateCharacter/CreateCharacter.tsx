@@ -66,8 +66,9 @@ export const CreateCharacterScreen = ({ navigation }: Props) => {
   }, [dirty, navigation]);
 
   return (
-    <SafeView>
+    <SafeView testID="create_character_view">
       <TextInput
+        testID="name_input"
         placeholder={t('Name')}
         onChangeText={handleChange('name')}
         onBlur={handleBlur('name')}
@@ -76,18 +77,21 @@ export const CreateCharacterScreen = ({ navigation }: Props) => {
       />
       <Text>{t('Skills')}:</Text>
       <TextInput
+        testID="first_skill_input"
         placeholder={t('First skill')}
         onChangeText={handleChange('skills[0]')}
         onBlur={handleBlur('skills[0]')}
         value={values.skills[0]}
       />
       <TextInput
+        testID="second_skill_input"
         placeholder={t('Second skill')}
         onChangeText={handleChange('skills[1]')}
         onBlur={handleBlur('skills[1]')}
         value={values.skills[1]}
       />
       <TextInput
+        testID="third_skill_input"
         placeholder={t('Third skill (optional)')}
         onChangeText={handleChange('skills[2]')}
         onBlur={handleBlur('skills[2]')}
@@ -96,24 +100,27 @@ export const CreateCharacterScreen = ({ navigation }: Props) => {
       <Text>{t('Third skill willpower tip')}</Text>
       <Text>{t('Obsessions')}:</Text>
       <TextInput
+        testID="first_obsession_input"
         placeholder={t('First obsession')}
         onChangeText={handleChange('obsessions[0]')}
         onBlur={handleBlur('obsessions[0]')}
         value={values.obsessions[0]}
       />
       <TextInput
+        testID="second_obsession_input"
         placeholder={t('Second obsession')}
         onChangeText={handleChange('obsessions[1]')}
         onBlur={handleBlur('obsessions[1]')}
         value={values.obsessions[1]}
       />
       <TextInput
+        testID="third_obsession_input"
         placeholder={t('Third obsession')}
         onChangeText={handleChange('obsessions[2]')}
         onBlur={handleBlur('obsessions[2]')}
         value={values.obsessions[2]}
       />
-      <Button title="Save" onPress={() => handleSubmit()} />
+      <Button testID="save_button" title="Save" onPress={() => handleSubmit()} />
     </SafeView>
   );
 };

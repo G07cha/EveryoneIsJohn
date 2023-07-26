@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useMemo } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export const SafeView = ({ children, style }: PropsWithChildren<{ style?: StyleProp<ViewStyle> }>) => {
+export const SafeView = ({ children, style, ...rest }: PropsWithChildren<ViewProps>) => {
   const insets = useSafeAreaInsets();
   const combinedStyles = useMemo<StyleProp<ViewStyle>>(
     () => [
@@ -17,5 +17,9 @@ export const SafeView = ({ children, style }: PropsWithChildren<{ style?: StyleP
     [insets, style],
   );
 
-  return <View style={combinedStyles}>{children}</View>;
+  return (
+    <View {...rest} style={combinedStyles}>
+      {children}
+    </View>
+  );
 };

@@ -28,7 +28,7 @@ export const CharactersListScreen = ({ navigation }: Props) => {
   }, [navigation, t]);
 
   return (
-    <SafeView>
+    <SafeView testID="characters_list_view">
       <FlatList
         data={listData}
         renderItem={({ item: character }) => (
