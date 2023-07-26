@@ -1,17 +1,14 @@
 import { jest } from '@jest/globals';
+import 'react-i18next';
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (key: string) => key,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    };
+export const useTranslation = jest.fn().mockReturnValue({
+  t: (key: string) => key,
+  i18n: {
+    changeLanguage: () => new Promise(() => {}),
   },
-  initReactI18next: {
-    type: '3rdParty',
-    init: () => {},
-  },
-}));
+});
+
+export const initReactI18next = {
+  type: '3rdParty',
+  init: () => {},
+};
