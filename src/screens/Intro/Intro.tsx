@@ -5,13 +5,13 @@ import { StyleSheet, View } from 'react-native';
 import { Image } from '../../components/Image';
 import { Button } from '../../components/Button';
 import { theme } from '../../theme';
-import { StackViewProps } from '../../navigation';
+import { RootStackScreenProps } from '../../navigation';
 
-type Props = StackViewProps<'Intro'>;
+type Props = RootStackScreenProps<'Intro'>;
 
-export type IntroViewParams = undefined;
+export type IntroScreenParams = undefined;
 
-export const IntroView = ({ navigation }: Props) => {
+export const IntroScreen = ({ navigation }: Props) => {
   const { t } = useTranslation();
 
   const onCreateCharacterRequest = useCallback(() => {

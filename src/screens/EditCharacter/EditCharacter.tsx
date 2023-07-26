@@ -1,46 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Button, Text } from 'react-native';
-import { FormikErrors, useFormik } from 'formik';
+import { Alert, Button, Text, TouchableOpacity } from 'react-native';
+import { useFormik } from 'formik';
 
 import { SafeView } from '../../components/SafeView';
-import { StackViewProps } from '../../navigation';
+import { RootStackScreenProps } from '../../navigation';
 import { TextInput } from '../../components/TextInput';
 import { useGlobalStore } from '../../modules/store';
 import { Character } from '../../modules/Character';
+import { Icon } from '../../components/Icon';
 
-type Props = StackViewProps<'CreateCharacter'>;
+type Props = RootStackScreenProps<'EditCharacter'>;
 
-export type CreateCharacterViewParams = undefined;
+export type EditCharacterScreenParams = { characterId: Character['id'] };
 
-export const CreateCharacterView = ({ navigation }: Props) => {
+export const EditCharacterScreen = ({ navigation, route }: Props) => {
+  const { characterId } = route.params;
+  const updateCharacter = useGlobalStore.use.updateCharacter();
+  const characters = useGlobalStore.use.characters();
+  const character = useMemo(() => characters.get(characterId), [characterId, characters]);
   const { t } = useTranslation();
-  const addCharacter = useGlobalStore.use.addCharacter();
-  const { dirty, handleBlur, handleChange, handleSubmit, values, errors } = useFormik<Omit<Character, 'id'>>({
-    initialValues: {
-      name: '',
-      obsessions: ['', '', ''],
-      score: 0,
-      skills: ['', '', ''],
-      willpower: 0,
-    },
+
+  useEffect(() => {
+    if (!character) {
+      return;
+    }
+
+    navigation.setOptions({
+      title: character.name,
+    });
+  }, [character, navigation]);
+
+  const { dirty, handleBlur, handleChange, handleSubmit, values } = useFormik<Character>({
+    initialValues: character as Character,
     onSubmit: (character) => {
-      addCharacter(character);
+      updateCharacter(character);
 
-      // Resetting state to prevent user from going back
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Characters' }],
-      });
-    },
-    validate: (values) => {
-      const errors: FormikErrors<Character> = {};
-
-      if (!values.name) {
-        errors.name = t('Name required error');
-      }
-
-      return errors;
+      navigation.navigate('Character', { characterId: character.id });
     },
   });
 
@@ -65,15 +61,43 @@ export const CreateCharacterView = ({ navigation }: Props) => {
     });
   }, [dirty, navigation]);
 
+  const decreaseScore = useCallback(() => {
+    if (!character) {
+      return;
+    }
+
+    updateCharacter({
+      ...character,
+      score: character.score - 1,
+    });
+  }, [character, updateCharacter]);
+
+  const increaseScore = useCallback(() => {
+    if (!character) {
+      return;
+    }
+
+    updateCharacter({
+      ...character,
+      score: character.score + 1,
+    });
+  }, [character, updateCharacter]);
+
+  if (!character) {
+    navigation.navigate('Characters');
+    return null;
+  }
+
   return (
     <SafeView>
-      <TextInput
-        placeholder={t('Name')}
-        onChangeText={handleChange('name')}
-        onBlur={handleBlur('name')}
-        value={values.name}
-        error={errors.name}
-      />
+      <Text>{t('Score')}</Text>
+      <TouchableOpacity onPress={decreaseScore}>
+        <Icon name="minus" />
+      </TouchableOpacity>
+      <Text>{character.score}</Text>
+      <TouchableOpacity onPress={increaseScore}>
+        <Icon name="plus" />
+      </TouchableOpacity>
       <Text>{t('Skills')}:</Text>
       <TextInput
         placeholder={t('First skill')}
@@ -93,7 +117,6 @@ export const CreateCharacterView = ({ navigation }: Props) => {
         onBlur={handleBlur('skills[2]')}
         value={values.skills[2]}
       />
-      <Text>{t('Third skill willpower tip')}</Text>
       <Text>{t('Obsessions')}:</Text>
       <TextInput
         placeholder={t('First obsession')}

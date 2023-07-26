@@ -10,14 +10,14 @@ import { TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RNBootSplash from 'react-native-bootsplash';
 
-import { CharactersListView } from './views/CharactersList';
-import { CharacterView } from './views/Character';
-import { CreateCharacterView } from './views/CreateCharacter';
+import { CharactersListScreen } from './screens/CharactersList';
+import { CharacterScreen } from './screens/Character';
+import { CreateCharacterScreen } from './screens/CreateCharacter';
 import { Icon } from './components/Icon';
 import { StackParamList } from './navigation';
-import { EditCharacterView } from './views/EditCharacter';
+import { EditCharacterScreen } from './screens/EditCharacter';
 import { useGlobalStore } from './modules/store';
-import { IntroView } from './views/Intro';
+import { IntroScreen } from './screens/Intro';
 import { theme } from './theme';
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -28,7 +28,7 @@ function App(): JSX.Element {
 
   useEffect(() => useGlobalStore.persist.onFinishHydration(() => RNBootSplash.hide({ fade: true, duration: 500 })), []);
 
-  const screenOptions = useCallback(
+  const sharedScreenOptions = useCallback(
     ({ navigation }: NativeStackScreenProps<StackParamList>): NativeStackNavigationOptions => ({
       headerLeft: ({ canGoBack }) => {
         return canGoBack ? (
@@ -51,20 +51,20 @@ function App(): JSX.Element {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Navigator screenOptions={sharedScreenOptions}>
           {hasCharacters === false && (
-            <Stack.Screen name="Intro" component={IntroView} options={{ headerShown: false }} />
+            <Stack.Screen name="Intro" component={IntroScreen} options={{ headerShown: false }} />
           )}
-          <Stack.Screen name="Characters" component={CharactersListView} />
+          <Stack.Screen name="Characters" component={CharactersListScreen} />
           <Stack.Screen
             name="CreateCharacter"
-            component={CreateCharacterView}
+            component={CreateCharacterScreen}
             options={{
               title: t('New character'),
             }}
           />
-          <Stack.Screen name="Character" component={CharacterView} options={{ title: '' }} />
-          <Stack.Screen name="EditCharacter" component={EditCharacterView} options={{ title: '' }} />
+          <Stack.Screen name="Character" component={CharacterScreen} options={{ title: '' }} />
+          <Stack.Screen name="EditCharacter" component={EditCharacterScreen} options={{ title: '' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

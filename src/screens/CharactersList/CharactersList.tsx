@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../../modules/store';
 import { Icon } from '../../components/Icon';
 import { SafeView } from '../../components/SafeView';
-import { StackViewProps } from '../../navigation';
+import { RootStackScreenProps } from '../../navigation';
 
-type Props = StackViewProps<'Characters'>;
+type Props = RootStackScreenProps<'Characters'>;
 
-export type CharactersListViewParams = undefined;
+export type CharactersListScreenParams = undefined;
 
-export const CharactersListView = ({ navigation }: Props) => {
+export const CharactersListScreen = ({ navigation }: Props) => {
   const { t } = useTranslation();
   const characters = useGlobalStore.use.characters();
   const listData = useMemo(() => Array.from(characters.values()).reverse(), [characters]);
