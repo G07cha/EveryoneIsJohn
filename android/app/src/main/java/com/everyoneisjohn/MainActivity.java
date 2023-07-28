@@ -1,4 +1,4 @@
-package com.everyoneisjohn;
+package org.g07cha.EveryoneIsJohn;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

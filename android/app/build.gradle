@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.everyoneisjohn"
+    namespace "org.g07cha.EveryoneIsJohn"
     defaultConfig {
-        applicationId "com.everyoneisjohn"
+        applicationId "org.g07cha.EveryoneIsJohn"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

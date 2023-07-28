@@ -1,4 +1,4 @@
-package com.everyoneisjohn;
+package org.g07cha.EveryoneIsJohn;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
