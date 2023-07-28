@@ -52,10 +52,10 @@ export const CreateCharacterScreen = ({ navigation }: Props) => {
 
       event.preventDefault();
 
-      Alert.alert('Discard changes?', 'You have unsaved changes. Are you sure to discard them and leave the screen?', [
-        { text: "Don't leave", style: 'cancel', onPress: () => {} },
+      Alert.alert(t('Cancel character creation'), t('Cancel character creation description'), [
+        { text: t("Don't leave"), style: 'cancel', onPress: () => {} },
         {
-          text: 'Discard',
+          text: t('Discard'),
           style: 'destructive',
           // If the user confirmed, then we dispatch the action we blocked earlier
           // This will continue the action that had triggered the removal of the screen
@@ -63,7 +63,7 @@ export const CreateCharacterScreen = ({ navigation }: Props) => {
         },
       ]);
     });
-  }, [dirty, navigation]);
+  }, [dirty, navigation, t]);
 
   return (
     <SafeView testID="create_character_view">

@@ -48,10 +48,10 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
 
       event.preventDefault();
 
-      Alert.alert('Discard changes?', 'You have unsaved changes. Are you sure to discard them and leave the screen?', [
-        { text: "Don't leave", style: 'cancel', onPress: () => {} },
+      Alert.alert(t('Discard changes?'), t('Discard changes description'), [
+        { text: t("Don't leave"), style: 'cancel', onPress: () => {} },
         {
-          text: 'Discard',
+          text: t('Discard'),
           style: 'destructive',
           // If the user confirmed, then we dispatch the action we blocked earlier
           // This will continue the action that had triggered the removal of the screen
@@ -59,7 +59,7 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
         },
       ]);
     });
-  }, [dirty, navigation]);
+  }, [dirty, navigation, t]);
 
   const decreaseScore = useCallback(() => {
     if (!character) {

@@ -1,6 +1,12 @@
 {
+  "Cancel character creation": "Aanmaken van een karakter annuleren",
+  "Cancel character creation description": "Als je teruggaat, wordt het personage niet aangemaakt",
   "Characters": "Karakters",
   "Create first character": "Maak eerste karakter",
+  "Discard": "Gooi weg",
+  "Discard changes description": "Als je teruggaat, gaan alle niet-opgeslagen wijzigingen verloren",
+  "Discard changes?": "Wijzigingen weggooien?",
+  "Don't leave": "Niet weggaan",
   "First obsession": "Eerste obsessie",
   "First skill": "Eerste vaardigheid",
   "Name": "Naam",
