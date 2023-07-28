@@ -1,0 +1,68 @@
+appId: org.g07cha.EveryoneIsJohn
+jsEngine: graaljs
+tags:
+  - stable
+  - edit-character
+onFlowStart:
+  - runScript: ../data/selectors.js
+  - runScript: ../data/inputs.js
+---
+- runScript: ../helpers/edit-character-store.js
+- launchApp:
+    clearState: true
+    arguments:
+      store: ${output.store}
+
+# ============================================================================
+# Ensure that character list is visible when at least one character is created
+# ============================================================================
+- assertVisible:
+    id: ${output.selectors.charactersListScreen.view}
+- tapOn: ${output.inputs.character.name}
+
+# ==============
+# Open edit view
+# ==============
+- tapOn:
+    id: ${output.selectors.characterScreen.editCharacterButton}
+- assertVisible:
+    id: ${output.selectors.editCharacterScreen.view}
+
+# ======================
+# Update editable fields
+# ======================
+- tapOn:
+    id: ${output.selectors.editCharacterScreen.firstSkillInput}
+- inputText: + edit skills 1
+- tapOn:
+    id: ${output.selectors.editCharacterScreen.secondSkillInput}
+- inputText: + edit skills 2
+- tapOn:
+    id: ${output.selectors.editCharacterScreen.thirdSkillInput}
+- inputText: + edit skills 3
+- tapOn:
+    id: ${output.selectors.editCharacterScreen.firstObsessionInput}
+- inputText: + edit obsessions 1
+- tapOn:
+    id: ${output.selectors.editCharacterScreen.secondObsessionInput}
+- inputText: + edit obsessions 2
+- tapOn:
+    id: ${output.selectors.editCharacterScreen.thirdObsessionInput}
+- inputText: + edit obsessions 3
+
+- tapOn:
+    id: ${output.selectors.editCharacterScreen.saveButton}
+
+- assertVisible:
+    id: ${output.selectors.characterScreen.view}
+
+# ===================
+# Verify updated data
+# ===================
+- assertVisible: ${output.inputs.character.skills[0] + '+ edit skills 1'}
+- assertVisible: ${output.inputs.character.skills[1] + '+ edit skills 2'}
+- assertVisible: ${output.inputs.character.skills[2] + '+ edit skills 3'}
+
+- assertVisible: ${output.inputs.character.obsessions[0] + '+ edit obsessions 1 1 point'}
+- assertVisible: ${output.inputs.character.obsessions[1] + '+ edit obsessions 2 2 points'}
+- assertVisible: ${output.inputs.character.obsessions[2] + '+ edit obsessions 3 3 points'}

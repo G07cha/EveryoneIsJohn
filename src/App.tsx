@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RNBootSplash from 'react-native-bootsplash';
+import { LaunchArguments } from 'react-native-launch-arguments';
 
 import { CharactersListScreen } from './screens/CharactersList';
 import { CharacterScreen } from './screens/Character';
@@ -16,7 +17,7 @@ import { CreateCharacterScreen } from './screens/CreateCharacter';
 import { Icon } from './components/Icon';
 import { StackParamList } from './navigation';
 import { EditCharacterScreen } from './screens/EditCharacter';
-import { useGlobalStore } from './modules/store';
+import { GlobalStoreState, useGlobalStore } from './modules/store';
 import { IntroScreen } from './screens/Intro';
 import { theme } from './theme';
 
@@ -26,7 +27,25 @@ function App(): JSX.Element {
   const { t } = useTranslation();
   const hasCharacters = useGlobalStore.use.characters().size > 0;
 
-  useEffect(() => useGlobalStore.persist.onFinishHydration(() => RNBootSplash.hide({ fade: true, duration: 500 })), []);
+  useEffect(
+    () =>
+      useGlobalStore.persist.onFinishHydration(() => {
+        RNBootSplash.hide({ fade: true, duration: 500 });
+
+        setTimeout(() => {
+          const { store } = LaunchArguments.value<{ store?: Partial<GlobalStoreState> }>();
+
+          if (store) {
+            useGlobalStore.setState((prevState) => ({
+              ...prevState,
+              ...store,
+              ...(store.characters && { characters: new Map(store.characters) }),
+            }));
+          }
+        });
+      }),
+    [],
+  );
 
   const sharedScreenOptions = useCallback(
     ({ navigation }: NativeStackScreenProps<StackParamList>): NativeStackNavigationOptions => ({

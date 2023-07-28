@@ -1,0 +1,74 @@
+appId: org.g07cha.EveryoneIsJohn
+tags:
+  - stable
+  - create-character
+onFlowStart:
+  - runScript: ../data/selectors.js
+  - runScript: ../data/inputs.js
+---
+- launchApp:
+    clearState: true
+
+- assertVisible:
+    id: ${output.selectors.introScreen.view}
+- tapOn:
+    id: ${output.selectors.introScreen.createCharacterButton}
+- assertVisible:
+    id: ${output.selectors.createCharacterScreen.view}
+
+# ====================
+# Enter character data
+# ====================
+
+- tapOn:
+    id: ${output.selectors.createCharacterScreen.nameInput}
+- inputText: ${output.inputs.character.name}
+
+- tapOn:
+    id: ${output.selectors.createCharacterScreen.firstSkillInput}
+- inputText: ${output.inputs.character.skills[0]}
+- tapOn:
+    id: ${output.selectors.createCharacterScreen.secondSkillInput}
+- inputText: ${output.inputs.character.skills[1]}
+- tapOn:
+    id: ${output.selectors.createCharacterScreen.thirdSkillInput}
+- inputText: ${output.inputs.character.skills[2]}
+
+- tapOn:
+    id: ${output.selectors.createCharacterScreen.firstObsessionInput}
+- inputText: ${output.inputs.character.obsessions[0]}
+- tapOn:
+    id: ${output.selectors.createCharacterScreen.secondObsessionInput}
+- inputText: ${output.inputs.character.obsessions[1]}
+- tapOn:
+    id: ${output.selectors.createCharacterScreen.thirdObsessionInput}
+- inputText: ${output.inputs.character.obsessions[2]}
+
+- tapOn:
+    id: ${output.selectors.createCharacterScreen.saveButton}
+
+# =====================================
+# Ensure character shows up in the list
+# =====================================
+
+- assertVisible:
+    id: ${output.selectors.charactersListScreen.view}
+- assertVisible: ${output.inputs.character.name}
+
+# =====================
+# Validate entered data
+# =====================
+
+- tapOn: ${output.inputs.character.name}
+- assertVisible:
+    id: ${output.selectors.characterScreen.view}
+
+- assertVisible: ${output.inputs.character.name}
+
+- assertVisible: ${output.inputs.character.skills[0]}
+- assertVisible: ${output.inputs.character.skills[1]}
+- assertVisible: ${output.inputs.character.skills[2]}
+
+- assertVisible: ${output.inputs.character.obsessions[0] + ' 1 point'}
+- assertVisible: ${output.inputs.character.obsessions[1] + ' 2 points'}
+- assertVisible: ${output.inputs.character.obsessions[2] + ' 3 points'}
