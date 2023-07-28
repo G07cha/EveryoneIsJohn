@@ -1,5 +1,3 @@
-/* global output */
-
 output.inputs = {
   character: {
     id: '123',

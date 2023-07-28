@@ -91,11 +91,11 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
   return (
     <SafeView testID="edit_character_view">
       <Text>{t('Score')}</Text>
-      <TouchableOpacity onPress={decreaseScore}>
+      <TouchableOpacity testID="decrease_score_button" onPress={decreaseScore}>
         <Icon name="minus" />
       </TouchableOpacity>
       <Text>{character.score}</Text>
-      <TouchableOpacity onPress={increaseScore}>
+      <TouchableOpacity testID="increase_score_button" onPress={increaseScore}>
         <Icon name="plus" />
       </TouchableOpacity>
       <Text>{t('Skills')}:</Text>

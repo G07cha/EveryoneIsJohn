@@ -81,11 +81,11 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
   return (
     <SafeView testID="character_view">
       <Text>{t('Willpower')}</Text>
-      <TouchableOpacity onPress={decreaseWillpower}>
+      <TouchableOpacity testID="decrease_willpower_button" onPress={decreaseWillpower}>
         <Icon name="minus" />
       </TouchableOpacity>
       <Text>{character.willpower}</Text>
-      <TouchableOpacity onPress={increaseWillpower}>
+      <TouchableOpacity testID="increase_willpower_button" onPress={increaseWillpower}>
         <Icon name="plus" />
       </TouchableOpacity>
       <Text>{t('Skills')}:</Text>
@@ -94,7 +94,11 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
       ))}
       <Text>{t('Obsessions')}:</Text>
       {character.obsessions.map((obsession, index) => (
-        <TouchableOpacity key={index} onPress={() => fulfillObsession(index)}>
+        <TouchableOpacity
+          key={index}
+          testID={`fullfil_obsession_${index + 1}_button`}
+          onPress={() => fulfillObsession(index)}
+        >
           <Text>
             {obsession} {t('point', { count: index + 1 })}
           </Text>
