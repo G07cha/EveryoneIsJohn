@@ -6,20 +6,20 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
-import { TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RNBootSplash from 'react-native-bootsplash';
 import { LaunchArguments } from 'react-native-launch-arguments';
+import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
 
 import { CharactersListScreen } from './screens/CharactersList';
 import { CharacterScreen } from './screens/Character';
 import { CreateCharacterScreen } from './screens/CreateCharacter';
-import { Icon } from './components/Icon';
 import { StackParamList } from './navigation';
 import { EditCharacterScreen } from './screens/EditCharacter';
 import { GlobalStoreState, useGlobalStore } from './modules/store';
 import { IntroScreen } from './screens/Intro';
 import { theme } from './theme';
+import { IconButton } from './components/IconButton';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -50,11 +50,7 @@ function App(): JSX.Element {
   const sharedScreenOptions = useCallback(
     ({ navigation }: NativeStackScreenProps<StackParamList>): NativeStackNavigationOptions => ({
       headerLeft: ({ canGoBack }) => {
-        return canGoBack ? (
-          <TouchableOpacity onPress={navigation.goBack}>
-            <Icon name="chevronLeft" />
-          </TouchableOpacity>
-        ) : null;
+        return canGoBack ? <IconButton icon="chevronLeft" onPress={navigation.goBack} /> : null;
       },
       headerStyle: {
         backgroundColor: theme.palette.primary,
@@ -72,22 +68,30 @@ function App(): JSX.Element {
       <NavigationContainer>
         <Stack.Navigator screenOptions={sharedScreenOptions}>
           {hasCharacters === false && (
-            <Stack.Screen name="Intro" component={IntroScreen} options={{ headerShown: false }} />
+            <Stack.Screen
+              name="Intro"
+              component={gestureHandlerRootHOC(IntroScreen)}
+              options={{ headerShown: false }}
+            />
           )}
-          <Stack.Screen name="Characters" component={CharactersListScreen} />
+          <Stack.Screen name="Characters" component={gestureHandlerRootHOC(CharactersListScreen)} />
           <Stack.Screen
             name="CreateCharacter"
-            component={CreateCharacterScreen}
+            component={gestureHandlerRootHOC(CreateCharacterScreen)}
             options={{
               title: t('New character'),
             }}
           />
-          <Stack.Screen name="Character" component={CharacterScreen} options={{ title: '' }} />
-          <Stack.Screen name="EditCharacter" component={EditCharacterScreen} options={{ title: '' }} />
+          <Stack.Screen name="Character" component={gestureHandlerRootHOC(CharacterScreen)} options={{ title: '' }} />
+          <Stack.Screen
+            name="EditCharacter"
+            component={gestureHandlerRootHOC(EditCharacterScreen)}
+            options={{ title: '' }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   );
 }
 
-export default App;
+export default gestureHandlerRootHOC(App);

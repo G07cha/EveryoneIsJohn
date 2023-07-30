@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Button, Text } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { FormikErrors, useFormik } from 'formik';
 
 import { SafeView } from '../../components/SafeView';
@@ -8,6 +8,7 @@ import { RootStackScreenProps } from '../../navigation';
 import { TextInput } from '../../components/TextInput';
 import { useGlobalStore } from '../../modules/store';
 import { Character } from '../../modules/Character';
+import { Button } from '../../components/Button';
 
 type Props = RootStackScreenProps<'CreateCharacter'>;
 
@@ -120,7 +121,9 @@ export const CreateCharacterScreen = ({ navigation }: Props) => {
         onBlur={handleBlur('obsessions[2]')}
         value={values.obsessions[2]}
       />
-      <Button testID="save_button" title="Save" onPress={() => handleSubmit()} />
+      <Button testID="save_button" onPress={() => handleSubmit()}>
+        {t('Save')}
+      </Button>
     </SafeView>
   );
 };

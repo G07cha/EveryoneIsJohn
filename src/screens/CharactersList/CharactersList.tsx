@@ -3,9 +3,9 @@ import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useGlobalStore } from '../../modules/store';
-import { Icon } from '../../components/Icon';
 import { SafeView } from '../../components/SafeView';
 import { RootStackScreenProps } from '../../navigation';
+import { IconButton } from '../../components/IconButton';
 
 type Props = RootStackScreenProps<'Characters'>;
 
@@ -20,9 +20,11 @@ export const CharactersListScreen = ({ navigation }: Props) => {
     navigation.setOptions({
       title: t('Characters'),
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('CreateCharacter')}>
-          <Icon name="plus" />
-        </TouchableOpacity>
+        <IconButton
+          testID="create_character_button"
+          icon="plus"
+          onPress={() => navigation.navigate('CreateCharacter')}
+        />
       ),
     });
   }, [navigation, t]);

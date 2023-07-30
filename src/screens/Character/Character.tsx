@@ -2,11 +2,11 @@ import { Text, TouchableOpacity } from 'react-native';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '../../components/Icon';
 import { SafeView } from '../../components/SafeView';
 import { RootStackScreenProps } from '../../navigation';
 import { Character } from '../../modules/Character';
 import { useGlobalStore } from '../../modules/store';
+import { IconButton } from '../../components/IconButton';
 
 type Props = RootStackScreenProps<'Character'>;
 
@@ -27,12 +27,11 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
     navigation.setOptions({
       title: character.name,
       headerRight: () => (
-        <TouchableOpacity
+        <IconButton
+          icon="pencil"
           testID="edit_character_button"
           onPress={() => navigation.navigate('EditCharacter', { characterId: character.id })}
-        >
-          <Icon name="pencil" />
-        </TouchableOpacity>
+        />
       ),
     });
   }, [character, navigation]);
@@ -81,13 +80,9 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
   return (
     <SafeView testID="character_view">
       <Text>{t('Willpower')}</Text>
-      <TouchableOpacity testID="decrease_willpower_button" onPress={decreaseWillpower}>
-        <Icon name="minus" />
-      </TouchableOpacity>
+      <IconButton testID="decrease_willpower_button" onPress={decreaseWillpower} icon="minus" type="primary" />
       <Text>{character.willpower}</Text>
-      <TouchableOpacity testID="increase_willpower_button" onPress={increaseWillpower}>
-        <Icon name="plus" />
-      </TouchableOpacity>
+      <IconButton testID="increase_willpower_button" onPress={increaseWillpower} icon="plus" type="primary" />
       <Text>{t('Skills')}:</Text>
       {character.skills.map((skill, index) => (
         <Text key={index}>{skill}</Text>

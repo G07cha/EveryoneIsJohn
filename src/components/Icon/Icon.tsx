@@ -8,8 +8,8 @@ const ICON_FILES = {
   chevronLeft: require('../../assets/icons/chevron-left.svg'),
 };
 
-export interface Props {
+export interface IconProps {
   name: keyof typeof ICON_FILES;
 }
 
-export const Icon = ({ name }: Props) => <VectorImage source={ICON_FILES[name]} />;
+export const Icon = ({ name }: IconProps) => <VectorImage source={ICON_FILES[name]} />;

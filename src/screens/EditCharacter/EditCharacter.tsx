@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Button, Text, TouchableOpacity } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { useFormik } from 'formik';
 
 import { SafeView } from '../../components/SafeView';
@@ -8,7 +8,8 @@ import { RootStackScreenProps } from '../../navigation';
 import { TextInput } from '../../components/TextInput';
 import { useGlobalStore } from '../../modules/store';
 import { Character } from '../../modules/Character';
-import { Icon } from '../../components/Icon';
+import { Button } from '../../components/Button';
+import { IconButton } from '../../components/IconButton';
 
 type Props = RootStackScreenProps<'EditCharacter'>;
 
@@ -91,13 +92,9 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
   return (
     <SafeView testID="edit_character_view">
       <Text>{t('Score')}</Text>
-      <TouchableOpacity testID="decrease_score_button" onPress={decreaseScore}>
-        <Icon name="minus" />
-      </TouchableOpacity>
+      <IconButton testID="decrease_score_button" onPress={decreaseScore} icon="minus" type="primary" />
       <Text>{character.score}</Text>
-      <TouchableOpacity testID="increase_score_button" onPress={increaseScore}>
-        <Icon name="plus" />
-      </TouchableOpacity>
+      <IconButton testID="increase_score_button" onPress={increaseScore} icon="plus" type="primary" />
       <Text>{t('Skills')}:</Text>
       <TextInput
         testID="first_skill_input"
@@ -142,7 +139,9 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
         onBlur={handleBlur('obsessions[2]')}
         value={values.obsessions[2]}
       />
-      <Button testID="save_button" title="Save" onPress={() => handleSubmit()} />
+      <Button testID="save_button" onPress={() => handleSubmit()}>
+        {t('Save')}
+      </Button>
     </SafeView>
   );
 };
