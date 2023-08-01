@@ -2,11 +2,11 @@ import { Text, TouchableOpacity } from 'react-native';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { SafeView } from '../../components/SafeView';
 import { RootStackScreenProps } from '../../navigation';
 import { Character } from '../../modules/Character';
 import { useGlobalStore } from '../../modules/store';
 import { IconButton } from '../../components/IconButton';
+import { ContentView } from '../../components/ContentView';
 
 type Props = RootStackScreenProps<'Character'>;
 
@@ -78,7 +78,7 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
   }
 
   return (
-    <SafeView testID="character_view">
+    <ContentView testID="character_view">
       <Text>{t('Willpower')}</Text>
       <IconButton testID="decrease_willpower_button" onPress={decreaseWillpower} icon="minus" type="primary" />
       <Text>{character.willpower}</Text>
@@ -99,6 +99,6 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
           </Text>
         </TouchableOpacity>
       ))}
-    </SafeView>
+    </ContentView>
   );
 };

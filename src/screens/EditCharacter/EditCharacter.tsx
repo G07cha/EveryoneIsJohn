@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { Alert, Text } from 'react-native';
 import { useFormik } from 'formik';
 
-import { SafeView } from '../../components/SafeView';
 import { RootStackScreenProps } from '../../navigation';
 import { TextInput } from '../../components/TextInput';
 import { useGlobalStore } from '../../modules/store';
 import { Character } from '../../modules/Character';
 import { Button } from '../../components/Button';
 import { IconButton } from '../../components/IconButton';
+import { ContentView } from '../../components/ContentView';
 
 type Props = RootStackScreenProps<'EditCharacter'>;
 
@@ -37,30 +37,33 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
     onSubmit: (character) => {
       updateCharacter(character);
 
-      navigation.navigate('Character', { characterId: character.id });
+      // Delaying navigation for smoother animation
+      setTimeout(() => navigation.goBack());
     },
   });
 
-  useEffect(() => {
-    navigation.addListener('beforeRemove', (event) => {
-      if (!dirty || event.data.action.type !== 'GO_BACK') {
-        return;
-      }
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (event) => {
+        if (!dirty || event.data.action.type !== 'GO_BACK') {
+          return;
+        }
 
-      event.preventDefault();
+        event.preventDefault();
 
-      Alert.alert(t('Discard changes?'), t('Discard changes description'), [
-        { text: t("Don't leave"), style: 'cancel', onPress: () => {} },
-        {
-          text: t('Discard'),
-          style: 'destructive',
-          // If the user confirmed, then we dispatch the action we blocked earlier
-          // This will continue the action that had triggered the removal of the screen
-          onPress: () => navigation.dispatch(event.data.action),
-        },
-      ]);
-    });
-  }, [dirty, navigation, t]);
+        Alert.alert(t('Discard changes?'), t('Discard changes description'), [
+          { text: t("Don't leave"), style: 'cancel', onPress: () => {} },
+          {
+            text: t('Discard'),
+            style: 'destructive',
+            // If the user confirmed, then we dispatch the action we blocked earlier
+            // This will continue the action that had triggered the removal of the screen
+            onPress: () => navigation.dispatch(event.data.action),
+          },
+        ]);
+      }),
+    [dirty, navigation, t],
+  );
 
   const decreaseScore = useCallback(() => {
     if (!character) {
@@ -90,7 +93,7 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
   }
 
   return (
-    <SafeView testID="edit_character_view">
+    <ContentView testID="edit_character_view">
       <Text>{t('Score')}</Text>
       <IconButton testID="decrease_score_button" onPress={decreaseScore} icon="minus" type="primary" />
       <Text>{character.score}</Text>
@@ -142,6 +145,6 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
       <Button testID="save_button" onPress={() => handleSubmit()}>
         {t('Save')}
       </Button>
-    </SafeView>
+    </ContentView>
   );
 };

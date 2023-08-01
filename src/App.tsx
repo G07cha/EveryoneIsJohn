@@ -55,10 +55,12 @@ function App(): JSX.Element {
       headerStyle: {
         backgroundColor: theme.palette.primary,
       },
+      headerShadowVisible: false,
       headerTintColor: theme.palette.secondary,
       headerTitleStyle: {
         fontWeight: 'bold',
       },
+      animation: 'slide_from_bottom',
     }),
     [],
   );

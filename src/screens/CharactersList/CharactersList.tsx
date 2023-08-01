@@ -3,11 +3,11 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useGlobalStore } from '../../modules/store';
-import { SafeView } from '../../components/SafeView';
 import { RootStackScreenProps } from '../../navigation';
 import { IconButton } from '../../components/IconButton';
 import { ListItem, ListItemSeparator } from '../../components/ListItem';
 import { Character } from '../../modules/Character';
+import { ContentView } from '../../components/ContentView';
 
 type Props = RootStackScreenProps<'Characters'>;
 
@@ -50,7 +50,7 @@ export const CharactersListScreen = ({ navigation }: Props) => {
   }, [navigation, t]);
 
   return (
-    <SafeView testID="characters_list_view">
+    <ContentView testID="characters_list_view">
       <FlatList
         data={listData}
         keyExtractor={({ id }) => id}
@@ -67,6 +67,6 @@ export const CharactersListScreen = ({ navigation }: Props) => {
           </ListItem>
         )}
       />
-    </SafeView>
+    </ContentView>
   );
 };

@@ -1,6 +1,8 @@
 import React, { PropsWithChildren, useMemo } from 'react';
-import { StyleProp, View, ViewProps, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewProps, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { theme } from '../../theme';
 
 export const SafeView = ({ children, style, ...rest }: PropsWithChildren<ViewProps>) => {
   const insets = useSafeAreaInsets();
@@ -11,6 +13,7 @@ export const SafeView = ({ children, style, ...rest }: PropsWithChildren<ViewPro
         paddingLeft: insets.left,
         paddingRight: insets.right,
       },
+      styles.container,
       style,
     ],
     [insets, style],
@@ -22,3 +25,10 @@ export const SafeView = ({ children, style, ...rest }: PropsWithChildren<ViewPro
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.palette.primary,
+    flex: 1,
+  },
+});

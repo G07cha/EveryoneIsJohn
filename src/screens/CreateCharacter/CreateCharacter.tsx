@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { Alert, Text } from 'react-native';
 import { FormikErrors, useFormik } from 'formik';
 
-import { SafeView } from '../../components/SafeView';
 import { RootStackScreenProps } from '../../navigation';
 import { TextInput } from '../../components/TextInput';
 import { useGlobalStore } from '../../modules/store';
 import { Character } from '../../modules/Character';
 import { Button } from '../../components/Button';
+import { ContentView } from '../../components/ContentView';
 
 type Props = RootStackScreenProps<'CreateCharacter'>;
 
@@ -67,7 +67,7 @@ export const CreateCharacterScreen = ({ navigation }: Props) => {
   }, [dirty, navigation, t]);
 
   return (
-    <SafeView testID="create_character_view">
+    <ContentView testID="create_character_view">
       <TextInput
         testID="name_input"
         placeholder={t('Name')}
@@ -124,6 +124,6 @@ export const CreateCharacterScreen = ({ navigation }: Props) => {
       <Button testID="save_button" onPress={() => handleSubmit()}>
         {t('Save')}
       </Button>
-    </SafeView>
+    </ContentView>
   );
 };
