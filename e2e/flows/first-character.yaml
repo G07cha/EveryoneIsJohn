@@ -5,6 +5,7 @@ tags:
 onFlowStart:
   - runScript: ../data/selectors.js
   - runScript: ../data/inputs.js
+
 ---
 - launchApp:
     clearState: true
@@ -53,13 +54,13 @@ onFlowStart:
 
 - assertVisible:
     id: ${output.selectors.charactersListScreen.view}
-- assertVisible: ${output.inputs.character.name}
+- assertVisible: ${output.inputs.character.name + ' (score:' + ' ' + output.inputs.character.score + ')'}
 
 # =====================
 # Validate entered data
 # =====================
 
-- tapOn: ${output.inputs.character.name}
+- tapOn: ${output.inputs.character.name + ' (score:' + ' ' + output.inputs.character.score + ')'}
 - assertVisible:
     id: ${output.selectors.characterScreen.view}
 

@@ -1,8 +1,12 @@
 {
+  "Cancel": "Cancel",
   "Cancel character creation": "Cancel character creation?",
   "Cancel character creation description": "If you go back the character will not be created",
   "Characters": "Characters",
   "Create first character": "Create first character",
+  "Delete": "Delete",
+  "Delete character description": "Once deleted it cannot be restored",
+  "Delete character?": "Delete \"{{name}}\" character?",
   "Discard": "Discard",
   "Discard changes description": "If you go back all unsaved changes will be lost",
   "Discard changes?": "Discard changes?",

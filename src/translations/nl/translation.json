@@ -1,8 +1,12 @@
 {
+  "Cancel": "Annuleren",
   "Cancel character creation": "Aanmaken van een karakter annuleren",
   "Cancel character creation description": "Als je teruggaat, wordt het personage niet aangemaakt",
   "Characters": "Karakters",
   "Create first character": "Maak eerste karakter",
+  "Delete": "Verwijderen",
+  "Delete character description": "Eenmaal verwijderd kan het niet meer hersteld worden",
+  "Delete character?": "Karakter \"{{name}}\" verwijderen?",
   "Discard": "Gooi weg",
   "Discard changes description": "Als je teruggaat, gaan alle niet-opgeslagen wijzigingen verloren",
   "Discard changes?": "Wijzigingen weggooien?",

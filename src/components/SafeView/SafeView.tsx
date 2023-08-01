@@ -7,7 +7,6 @@ export const SafeView = ({ children, style, ...rest }: PropsWithChildren<ViewPro
   const combinedStyles = useMemo<StyleProp<ViewStyle>>(
     () => [
       {
-        paddingTop: insets.top,
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,
         paddingRight: insets.right,

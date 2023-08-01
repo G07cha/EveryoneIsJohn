@@ -17,7 +17,7 @@
     "generate:translations": "NODE_ENV=development babel -f .babelrc 'src/**/*.{js,jsx,ts,tsx}' > /dev/null"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
+    "**/*.{js,jsx,ts,tsx,json,yaml}": [
       "npx prettier --write",
       "npx eslint --fix"
     ]

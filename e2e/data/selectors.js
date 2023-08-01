@@ -19,6 +19,7 @@ output.selectors = {
   charactersListScreen: {
     view: 'characters_list_view',
     createCharacterButton: 'create_character_button',
+    deleteCharacterButton: 'delete_character_button',
   },
 
   characterScreen: {

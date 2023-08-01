@@ -18,7 +18,8 @@ onFlowStart:
 # ============================================================================
 - assertVisible:
     id: ${output.selectors.charactersListScreen.view}
-- tapOn: ${output.inputs.character.name}
+- tapOn:
+    id: character-${output.inputs.character.id}
 
 # ==============
 # Open edit view
