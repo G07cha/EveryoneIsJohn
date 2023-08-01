@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { BorderlessButton, BorderlessButtonProps } from 'react-native-gesture-handler';
+import { BorderlessButtonProps, RectButton } from 'react-native-gesture-handler';
 
 import { theme } from '../../theme';
 
@@ -10,27 +10,24 @@ export interface ButtonProps extends Pick<BorderlessButtonProps, 'onPress'> {
 }
 
 export const Button = ({ children, testID, ...rest }: ButtonProps) => (
-  <BorderlessButton {...rest} style={styles.buttonContainer}>
+  <RectButton {...rest} style={styles.buttonContainer}>
     <View accessible accessibilityRole="button" style={styles.button} testID={testID}>
       <Text style={styles.text}>{children}</Text>
     </View>
-  </BorderlessButton>
+  </RectButton>
 );
 
 const styles = StyleSheet.create({
-  button: {
+  button: {},
+  buttonContainer: {
     alignItems: 'center',
+    alignSelf: 'center',
     backgroundColor: theme.palette.primary,
     borderRadius: 5,
     justifyContent: 'center',
     paddingHorizontal: 30,
     paddingVertical: 10,
     ...theme.shadows.primary,
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
   },
   text: {
     color: theme.palette.secondary,
