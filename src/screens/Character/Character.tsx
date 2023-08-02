@@ -1,5 +1,5 @@
-import { Text, TouchableOpacity } from 'react-native';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import { Text } from 'react-native';
+import React, { Fragment, useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { RootStackScreenProps } from '../../navigation';
@@ -7,6 +7,7 @@ import { Character } from '../../modules/Character';
 import { useGlobalStore } from '../../modules/store';
 import { IconButton } from '../../components/IconButton';
 import { ContentView } from '../../components/ContentView';
+import { ListItem, ListItemSeparator } from '../../components/ListItem';
 
 type Props = RootStackScreenProps<'Character'>;
 
@@ -89,16 +90,16 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
       ))}
       <Text>{t('Obsessions')}:</Text>
       {character.obsessions.map((obsession, index) => (
-        <TouchableOpacity
-          key={index}
-          testID={`fullfil_obsession_${index + 1}_button`}
-          onPress={() => fulfillObsession(index)}
-        >
-          <Text>
-            {obsession} {t('point', { count: index + 1 })}
-          </Text>
-        </TouchableOpacity>
+        <Fragment key={index}>
+          <ListItemSeparator />
+          <ListItem testID={`fullfil_obsession_${index + 1}_button`} onPress={() => fulfillObsession(index)}>
+            <Text>
+              {obsession} {t('point', { count: index + 1 })}
+            </Text>
+          </ListItem>
+        </Fragment>
       ))}
+      <ListItemSeparator />
     </ContentView>
   );
 };
