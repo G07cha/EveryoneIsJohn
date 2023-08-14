@@ -12,7 +12,7 @@ export interface ListItemProps extends Omit<GenericTouchableProps, 'style'> {
   onDelete?: () => void;
 }
 
-export const ListItem = ({ children, onDelete, ...rest }: PropsWithChildren<ListItemProps>) => {
+export const ListItem = ({ children, onDelete, testID, ...rest }: PropsWithChildren<ListItemProps>) => {
   const renderRightActions = useCallback<Required<SwipeableProps>['renderRightActions']>(
     (progress, _, swipeable) => {
       const translateX = progress.interpolate({
@@ -27,14 +27,15 @@ export const ListItem = ({ children, onDelete, ...rest }: PropsWithChildren<List
           }}
         >
           <RectButton
-            testID="delete_character_button"
             style={styles.deleteButton}
             onPress={() => {
               onDelete?.();
               swipeable.close();
             }}
           >
-            <Animated.Text style={styles.deleteText}>Delete</Animated.Text>
+            <View accessible accessibilityRole="button" testID="delete_character_button">
+              <Animated.Text style={styles.deleteText}>Delete</Animated.Text>
+            </View>
           </RectButton>
         </Animated.View>
       );
@@ -43,13 +44,14 @@ export const ListItem = ({ children, onDelete, ...rest }: PropsWithChildren<List
   );
 
   return onDelete ? (
-    <Swipeable overshootRight={false} renderRightActions={renderRightActions}>
+    // testID has to be specified on Swipeable for Android to pick it up
+    <Swipeable testID={testID} overshootRight={false} renderRightActions={renderRightActions}>
       <TouchableOpacity {...rest} style={styles.listItem}>
         {children}
       </TouchableOpacity>
     </Swipeable>
   ) : (
-    <TouchableOpacity {...rest} style={styles.listItem}>
+    <TouchableOpacity {...rest} testID={testID} style={styles.listItem}>
       {children}
     </TouchableOpacity>
   );

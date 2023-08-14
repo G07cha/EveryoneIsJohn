@@ -59,7 +59,7 @@ export const CharactersListScreen = ({ navigation }: Props) => {
           <ListItem
             onPress={() => navigation.navigate('Character', { characterId: character.id })}
             onDelete={() => onDelete(character)}
-            testID={`character-${character.id}`}
+            testID={`character_${character.id}`}
           >
             <Text>
               {character.name} ({t('Score').toLocaleLowerCase()}: {character.score})

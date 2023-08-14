@@ -30,6 +30,9 @@ output.selectors = {
     fullfil_first_obsession_button: 'fullfil_obsession_1_button',
     fullfil_second_obsession_button: 'fullfil_obsession_2_button',
     fullfil_third_obsession_button: 'fullfil_obsession_3_button',
+    rollDieButton: 'roll_die_button',
+    rollResultText: 'roll_result_text',
+    willpowerValue: 'character_willpower',
   },
 
   editCharacterScreen: {

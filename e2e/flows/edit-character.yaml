@@ -7,7 +7,7 @@ onFlowStart:
   - runScript: ../data/selectors.js
   - runScript: ../data/inputs.js
 ---
-- runScript: ../helpers/edit-character-store.js
+- runScript: ../helpers/single-character-store.js
 - launchApp:
     clearState: true
     arguments:
@@ -19,7 +19,7 @@ onFlowStart:
 - assertVisible:
     id: ${output.selectors.charactersListScreen.view}
 - tapOn:
-    id: character-${output.inputs.character.id}
+    id: character_${output.inputs.character.id}
 
 # ==============
 # Open edit view

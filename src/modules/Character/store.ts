@@ -11,7 +11,7 @@ export interface CharactersSlice {
   characters: Map<Character['id'], Character>;
   addCharacter(character: Omit<Character, 'id'>): void;
   removeCharacter(id: Character['id']): void;
-  updateCharacter(character: Character): void;
+  updateCharacter(id: Character['id'], setter: (prevCharacter: Character) => Character): void;
 }
 
 const DEFAULT_STARTING_WILLPOWER = 10;
@@ -37,14 +37,23 @@ export const createCharacterStoreSlice: StateCreator<
       }),
     }));
   },
-  removeCharacter: (id: Character['id']) =>
+  removeCharacter: (id) =>
     setState((prev) => {
       const characters = new Map(prev.characters);
       characters.delete(id);
       return { characters };
     }),
-  updateCharacter: (character) =>
-    setState((prev) => ({
-      characters: new Map(prev.characters).set(character.id, character),
-    })),
+  updateCharacter: (id, setter) => {
+    setState((prev) => {
+      const prevCharacter = prev.characters.get(id);
+
+      if (!prevCharacter) {
+        throw new Error(`Character with "${id}" id not found`);
+      }
+
+      return {
+        characters: new Map(prev.characters).set(id, setter(prevCharacter)),
+      };
+    });
+  },
 });

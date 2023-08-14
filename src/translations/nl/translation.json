@@ -1,4 +1,6 @@
 {
+  "Add willpower description": "De uitkomst van een rol kan worden verbeterd door de wilskracht van het karakter te gebruiken",
+  "Add willpower?": "Wilskracht gebruiken?",
   "Cancel": "Annuleren",
   "Cancel character creation": "Aanmaken van een karakter annuleren",
   "Cancel character creation description": "Als je teruggaat, wordt het personage niet aangemaakt",
@@ -17,6 +19,7 @@
   "Name required error": "Naam is verplicht",
   "New character": "Nieuw karakter",
   "Obsessions": "Obsessies",
+  "Roll": "",
   "Save": "Opslaan",
   "Score": "Score",
   "Second obsession": "Tweede obsessie",

@@ -1,4 +1,4 @@
-import { Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import React, { Fragment, useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,6 +8,8 @@ import { useGlobalStore } from '../../modules/store';
 import { IconButton } from '../../components/IconButton';
 import { ContentView } from '../../components/ContentView';
 import { ListItem, ListItemSeparator } from '../../components/ListItem';
+
+import { DieButton } from './components/DieButton';
 
 type Props = RootStackScreenProps<'Character'>;
 
@@ -42,35 +44,41 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
       return;
     }
 
-    updateCharacter({
-      ...character,
-      willpower: character.willpower - 1,
-    });
-  }, [character, updateCharacter]);
+    updateCharacter(characterId, (prevCharacter) => ({
+      ...prevCharacter,
+      willpower: prevCharacter.willpower - 1,
+    }));
+  }, [character, characterId, updateCharacter]);
 
   const increaseWillpower = useCallback(() => {
-    if (!character) {
-      return;
-    }
-
-    updateCharacter({
-      ...character,
-      willpower: character.willpower + 1,
-    });
-  }, [character, updateCharacter]);
+    updateCharacter(characterId, (prevCharacter) => ({
+      ...prevCharacter,
+      willpower: prevCharacter.willpower + 1,
+    }));
+  }, [characterId, updateCharacter]);
 
   const fulfillObsession = useCallback(
     (obsessionIndex: number) => {
-      if (!character) {
+      updateCharacter(characterId, (prevCharacter) => ({
+        ...prevCharacter,
+        score: prevCharacter.score + obsessionIndex + 1,
+      }));
+    },
+    [characterId, updateCharacter],
+  );
+
+  const rollDie = useCallback(
+    (willpower: number) => {
+      if (willpower === 0) {
         return;
       }
 
-      updateCharacter({
-        ...character,
-        score: character.score + obsessionIndex + 1,
-      });
+      updateCharacter(characterId, (prevCharacter) => ({
+        ...prevCharacter,
+        willpower: prevCharacter.willpower - willpower,
+      }));
     },
-    [character, updateCharacter],
+    [characterId, updateCharacter],
   );
 
   if (!character) {
@@ -79,10 +87,10 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
   }
 
   return (
-    <ContentView testID="character_view">
+    <ContentView testID="character_view" style={styles.container}>
       <Text>{t('Willpower')}</Text>
       <IconButton testID="decrease_willpower_button" onPress={decreaseWillpower} icon="minus" type="primary" />
-      <Text>{character.willpower}</Text>
+      <Text testID="character_willpower">{character.willpower}</Text>
       <IconButton testID="increase_willpower_button" onPress={increaseWillpower} icon="plus" type="primary" />
       <Text>{t('Skills')}:</Text>
       {character.skills.map((skill, index) => (
@@ -100,6 +108,15 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
         </Fragment>
       ))}
       <ListItemSeparator />
+
+      <DieButton availableWillpower={character.willpower} onRoll={rollDie} />
     </ContentView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'space-between',
+    paddingBottom: 10,
+  },
+});

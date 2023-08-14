@@ -1,3 +1,5 @@
+import { ViewStyle } from 'react-native';
+
 export const theme = {
   palette: {
     primary: '#3F97FF',
@@ -12,6 +14,7 @@ export const theme = {
       shadowOffset: { width: -2, height: 4 },
       shadowOpacity: 0.2,
       shadowRadius: 3,
+      elevation: 3,
     },
   },
-} as const;
+} satisfies { palette: Record<string, string>; shadows: Record<string, ViewStyle> };

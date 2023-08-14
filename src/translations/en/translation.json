@@ -1,4 +1,6 @@
 {
+  "Add willpower description": "Roll outcome can be improved by spending character's willpower",
+  "Add willpower?": "Add willpower?",
   "Cancel": "Cancel",
   "Cancel character creation": "Cancel character creation?",
   "Cancel character creation description": "If you go back the character will not be created",
@@ -17,6 +19,7 @@
   "Name required error": "Name is required",
   "New character": "New character",
   "Obsessions": "Obsessions",
+  "Roll": "Roll",
   "Save": "Save",
   "Score": "Score",
   "Second obsession": "Second obsession",

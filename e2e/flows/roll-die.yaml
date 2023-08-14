@@ -1,0 +1,32 @@
+appId: org.g07cha.EveryoneIsJohn
+jsEngine: graaljs
+tags:
+  - stable
+  - roll-die
+onFlowStart:
+  - runScript: ../data/selectors.js
+  - runScript: ../data/inputs.js
+---
+- runScript: ../helpers/single-character-store.js
+- launchApp:
+    clearState: true
+    arguments:
+      store: ${output.store}
+
+- tapOn:
+    id: character_${output.inputs.character.id}
+
+- tapOn:
+    id: ${output.selectors.characterScreen.rollDieButton}
+- tapOn:
+    id: 1_carousel_button
+- copyTextFrom:
+    id: ${output.selectors.characterScreen.rollResultText}
+
+# Assert that result contained selected willpower
+- assertTrue: ${maestro.copiedText.indexOf(' + 1 = ') > -1}
+
+# Assert that willpower was decreased by selected number
+- assertVisible:
+    text: ${output.inputs.character.willpower - 1}
+    id: ${output.selectors.characterScreen.willpowerValue}

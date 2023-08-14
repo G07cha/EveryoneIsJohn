@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -25,24 +25,24 @@ const Stack = createNativeStackNavigator<StackParamList>();
 
 function App(): JSX.Element {
   const { t } = useTranslation();
-  const hasCharacters = useGlobalStore.use.characters().size > 0;
+  const [hasCharacters, setHasCharacters] = useState(false);
 
   useEffect(
     () =>
       useGlobalStore.persist.onFinishHydration(() => {
+        const { store } = LaunchArguments.value<{ store?: Partial<GlobalStoreState> }>();
+
+        if (store) {
+          useGlobalStore.setState((prevState) => ({
+            ...prevState,
+            ...store,
+            ...(store.characters && { characters: new Map(store.characters) }),
+          }));
+        }
+
+        // Checking characters list on load to prevent unnecessary rerenders when it changes, causes extra animation when app is reloaded on dev which doesn't happen in packaged application
+        setHasCharacters(useGlobalStore.getState().characters.size > 0);
         RNBootSplash.hide({ fade: true, duration: 500 });
-
-        setTimeout(() => {
-          const { store } = LaunchArguments.value<{ store?: Partial<GlobalStoreState> }>();
-
-          if (store) {
-            useGlobalStore.setState((prevState) => ({
-              ...prevState,
-              ...store,
-              ...(store.characters && { characters: new Map(store.characters) }),
-            }));
-          }
-        });
       }),
     [],
   );

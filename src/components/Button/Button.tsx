@@ -11,14 +11,13 @@ export interface ButtonProps extends Pick<BorderlessButtonProps, 'onPress'> {
 
 export const Button = ({ children, testID, ...rest }: ButtonProps) => (
   <RectButton {...rest} style={styles.buttonContainer}>
-    <View accessible accessibilityRole="button" style={styles.button} testID={testID}>
+    <View accessible accessibilityRole="button" testID={testID}>
       <Text style={styles.text}>{children}</Text>
     </View>
   </RectButton>
 );
 
 const styles = StyleSheet.create({
-  button: {},
   buttonContainer: {
     alignItems: 'center',
     alignSelf: 'center',

@@ -34,11 +34,17 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
 
   const { dirty, handleBlur, handleChange, handleSubmit, values } = useFormik<Character>({
     initialValues: character as Character,
-    onSubmit: (character) => {
-      updateCharacter(character);
+    onSubmit: (updatedCharacter, { resetForm }) => {
+      updateCharacter(characterId, (prevCharacter) => {
+        const character: Character = { ...prevCharacter, ...updatedCharacter };
+        resetForm({
+          values: character,
+        });
 
-      // Delaying navigation for smoother animation
-      setTimeout(() => navigation.goBack());
+        return character;
+      });
+
+      navigation.goBack();
     },
   });
 
@@ -66,26 +72,18 @@ export const EditCharacterScreen = ({ navigation, route }: Props) => {
   );
 
   const decreaseScore = useCallback(() => {
-    if (!character) {
-      return;
-    }
-
-    updateCharacter({
-      ...character,
-      score: character.score - 1,
-    });
-  }, [character, updateCharacter]);
+    updateCharacter(characterId, (prevCharacter) => ({
+      ...prevCharacter,
+      score: prevCharacter.score - 1,
+    }));
+  }, [characterId, updateCharacter]);
 
   const increaseScore = useCallback(() => {
-    if (!character) {
-      return;
-    }
-
-    updateCharacter({
-      ...character,
-      score: character.score + 1,
-    });
-  }, [character, updateCharacter]);
+    updateCharacter(characterId, (prevCharacter) => ({
+      ...prevCharacter,
+      score: prevCharacter.score + 1,
+    }));
+  }, [characterId, updateCharacter]);
 
   if (!character) {
     navigation.navigate('Characters');

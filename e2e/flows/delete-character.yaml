@@ -2,12 +2,12 @@ appId: org.g07cha.EveryoneIsJohn
 jsEngine: graaljs
 tags:
   - stable
-  - edit-character
+  - delete-character
 onFlowStart:
   - runScript: ../data/selectors.js
   - runScript: ../data/inputs.js
 ---
-- runScript: ../helpers/edit-character-store.js
+- runScript: ../helpers/single-character-store.js
 - launchApp:
     clearState: true
     arguments:
@@ -15,10 +15,10 @@ onFlowStart:
 
 - swipe:
     from:
-      id: character-${output.inputs.character.id}
+      id: character_${output.inputs.character.id}
     direction: LEFT
 - tapOn:
     id: ${output.selectors.charactersListScreen.deleteCharacterButton}
 - tapOn: 'Delete'
 - assertNotVisible:
-    id: character-${output.inputs.character.id}
+    id: character_${output.inputs.character.id}
