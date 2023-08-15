@@ -41,12 +41,24 @@ onFlowStart:
 - tapOn:
     id: ${output.selectors.editCharacterScreen.thirdSkillInput}
 - inputText: + edit skills 3
+- scrollUntilVisible:
+    element:
+      id: ${output.selectors.editCharacterScreen.firstObsessionInput}
+    direction: DOWN
 - tapOn:
     id: ${output.selectors.editCharacterScreen.firstObsessionInput}
 - inputText: + edit obsessions 1
+- scrollUntilVisible:
+    element:
+      id: ${output.selectors.editCharacterScreen.secondObsessionInput}
+    direction: DOWN
 - tapOn:
     id: ${output.selectors.editCharacterScreen.secondObsessionInput}
 - inputText: + edit obsessions 2
+- scrollUntilVisible:
+    element:
+      id: ${output.selectors.editCharacterScreen.thirdObsessionInput}
+    direction: DOWN
 - tapOn:
     id: ${output.selectors.editCharacterScreen.thirdObsessionInput}
 - inputText: + edit obsessions 3

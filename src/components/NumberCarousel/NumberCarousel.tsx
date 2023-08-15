@@ -31,7 +31,8 @@ const ITEM_SIZE = 50;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    height: ITEM_SIZE,
+    // Extra space for slider on Android
+    height: ITEM_SIZE + 10,
   },
   item: {
     alignItems: 'center',

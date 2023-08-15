@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     paddingBottom: 15,
-    paddingLeft: 5,
+    paddingLeft: 10,
     paddingTop: 15,
   },
   separator: {

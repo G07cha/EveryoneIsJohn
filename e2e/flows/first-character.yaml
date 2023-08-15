@@ -35,16 +35,32 @@ onFlowStart:
     id: ${output.selectors.createCharacterScreen.thirdSkillInput}
 - inputText: ${output.inputs.character.skills[2]}
 
+- scrollUntilVisible:
+    element:
+      id: ${output.selectors.createCharacterScreen.firstObsessionInput}
+    direction: DOWN
 - tapOn:
     id: ${output.selectors.createCharacterScreen.firstObsessionInput}
 - inputText: ${output.inputs.character.obsessions[0]}
+- scrollUntilVisible:
+    element:
+      id: ${output.selectors.createCharacterScreen.secondObsessionInput}
+    direction: DOWN
 - tapOn:
     id: ${output.selectors.createCharacterScreen.secondObsessionInput}
 - inputText: ${output.inputs.character.obsessions[1]}
+- scrollUntilVisible:
+    element:
+      id: ${output.selectors.createCharacterScreen.thirdObsessionInput}
+    direction: DOWN
 - tapOn:
     id: ${output.selectors.createCharacterScreen.thirdObsessionInput}
 - inputText: ${output.inputs.character.obsessions[2]}
 
+- scrollUntilVisible:
+    element:
+      id: ${output.selectors.createCharacterScreen.saveButton}
+    direction: DOWN
 - tapOn:
     id: ${output.selectors.createCharacterScreen.saveButton}
 
