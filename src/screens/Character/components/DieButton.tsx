@@ -1,12 +1,13 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BorderlessButton } from 'react-native-gesture-handler';
-import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 import { usePopover, Popover } from 'react-native-modal-popover';
 
 import { Die, DieProps } from '../../../components/Die';
 import { NumberCarousel } from '../../../components/NumberCarousel';
 import { theme } from '../../../theme';
+import { Span, SubTitle } from '../../../components/Typography';
 
 export interface DieButtonProps {
   availableWillpower: number;
@@ -100,8 +101,8 @@ export const DieButton = ({ onRoll, availableWillpower }: DieButtonProps) => {
         placement="top"
         contentStyle={styles.popoverView}
       >
-        <Text>{t('Add willpower?')}</Text>
-        <Text>{t('Add willpower description')}</Text>
+        <SubTitle>{t('Add willpower?')}</SubTitle>
+        <Span style={styles.willpowerDescription}>{t('Add willpower description')}</Span>
         <NumberCarousel min={0} max={availableWillpower} onPress={handleSubmit} />
       </Popover>
     </>
@@ -122,9 +123,14 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   popoverView: {
+    alignItems: 'center',
     borderRadius: 5,
     maxWidth: Dimensions.get('window').width - 30,
     // To allow scrolling in ScrollView
     position: 'relative',
+  },
+  willpowerDescription: {
+    marginBottom: 10,
+    textAlign: 'center',
   },
 });
