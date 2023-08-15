@@ -28,7 +28,7 @@ export const DieButton = ({ onRoll, availableWillpower }: DieButtonProps) => {
   const [rollingStage, setRollingStage] = useState<RollingStage>(RollingStage.initial);
   const [dieValue, setDieValue] = useState<DieProps['value']>(6);
   const storedSpentWillpower = useRef(0);
-  const resultTranslateYOpacity = useRef(new Animated.ValueXY({ x: 20, y: 0 })).current;
+  const resultTranslateYOpacity = useRef(new Animated.ValueXY({ x: 0, y: 20 })).current;
 
   const resetAnimation = useCallback(() => {
     setRollingStage(RollingStage.initial);
