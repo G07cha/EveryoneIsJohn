@@ -72,9 +72,9 @@ const styles = StyleSheet.create({
     color: theme.palette.secondary,
   },
   listItem: {
-    paddingBottom: 10,
+    paddingBottom: 15,
     paddingLeft: 5,
-    paddingTop: 10,
+    paddingTop: 15,
   },
   separator: {
     backgroundColor: theme.palette.primary,

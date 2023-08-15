@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React, { Fragment, useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,6 +8,7 @@ import { useGlobalStore } from '../../modules/store';
 import { IconButton } from '../../components/IconButton';
 import { ContentView } from '../../components/ContentView';
 import { ListItem, ListItemSeparator } from '../../components/ListItem';
+import { Span, SubTitle, Title } from '../../components/Typography';
 
 import { DieButton } from './components/DieButton';
 
@@ -88,26 +89,34 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
 
   return (
     <ContentView testID="character_view" style={styles.container}>
-      <Text>{t('Willpower')}</Text>
-      <IconButton testID="decrease_willpower_button" onPress={decreaseWillpower} icon="minus" type="primary" />
-      <Text testID="character_willpower">{character.willpower}</Text>
-      <IconButton testID="increase_willpower_button" onPress={increaseWillpower} icon="plus" type="primary" />
-      <Text>{t('Skills')}:</Text>
-      {character.skills.map((skill, index) => (
-        <Text key={index}>{skill}</Text>
-      ))}
-      <Text>{t('Obsessions')}:</Text>
-      {character.obsessions.map((obsession, index) => (
-        <Fragment key={index}>
-          <ListItemSeparator />
-          <ListItem testID={`fullfil_obsession_${index + 1}_button`} onPress={() => fulfillObsession(index)}>
-            <Text>
-              {obsession} {t('point', { count: index + 1 })}
-            </Text>
-          </ListItem>
-        </Fragment>
-      ))}
-      <ListItemSeparator />
+      <View>
+        <SubTitle style={styles.willpowerTitle}>{t('Willpower')}</SubTitle>
+        <View style={styles.row}>
+          <IconButton testID="decrease_willpower_button" onPress={decreaseWillpower} icon="minus" type="primary" />
+          <Title testID="character_willpower">{character.willpower}</Title>
+          <IconButton testID="increase_willpower_button" onPress={increaseWillpower} icon="plus" type="primary" />
+        </View>
+      </View>
+      <View style={styles.skillsContainer}>
+        <SubTitle>{t('Skills') + ':'}</SubTitle>
+        <View style={styles.skillsList}>
+          {character.skills.map((skill, index) => (
+            <Span key={index}>{skill}</Span>
+          ))}
+        </View>
+      </View>
+      <View>
+        <SubTitle style={styles.obsessionsTitle}>{t('Obsessions') + ':'}</SubTitle>
+        {character.obsessions.map((obsession, index) => (
+          <Fragment key={index}>
+            <ListItemSeparator />
+            <ListItem testID={`fullfil_obsession_${index + 1}_button`} onPress={() => fulfillObsession(index)}>
+              <Span style={styles.obsessionText}>{obsession + ' ' + t('point', { count: index + 1 })}</Span>
+            </ListItem>
+          </Fragment>
+        ))}
+        <ListItemSeparator />
+      </View>
 
       <DieButton availableWillpower={character.willpower} onRoll={rollDie} />
     </ContentView>
@@ -116,7 +125,28 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
-    paddingBottom: 10,
+    justifyContent: 'space-around',
+  },
+  obsessionText: {
+    paddingLeft: 10,
+  },
+  obsessionsTitle: {
+    paddingLeft: 10,
+  },
+  row: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 20,
+    justifyContent: 'center',
+  },
+  skillsContainer: {
+    padding: 10,
+  },
+  skillsList: {
+    gap: 10,
+  },
+  willpowerTitle: {
+    marginTop: 20,
+    textAlign: 'center',
   },
 });

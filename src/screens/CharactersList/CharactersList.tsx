@@ -1,4 +1,4 @@
-import { Alert, FlatList, Text } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,6 +8,7 @@ import { IconButton } from '../../components/IconButton';
 import { ListItem, ListItemSeparator } from '../../components/ListItem';
 import { Character } from '../../modules/Character';
 import { ContentView } from '../../components/ContentView';
+import { Span } from '../../components/Typography';
 
 type Props = RootStackScreenProps<'Characters'>;
 
@@ -61,9 +62,7 @@ export const CharactersListScreen = ({ navigation }: Props) => {
             onDelete={() => onDelete(character)}
             testID={`character_${character.id}`}
           >
-            <Text>
-              {character.name} ({t('Score').toLocaleLowerCase()}: {character.score})
-            </Text>
+            <Span>{character.name + ' (' + t('Score').toLocaleLowerCase() + ': ' + character.score + ')'}</Span>
           </ListItem>
         )}
       />

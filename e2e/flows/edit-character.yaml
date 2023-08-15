@@ -51,6 +51,10 @@ onFlowStart:
     id: ${output.selectors.editCharacterScreen.thirdObsessionInput}
 - inputText: + edit obsessions 3
 
+- scrollUntilVisible:
+    element:
+      id: ${output.selectors.editCharacterScreen.saveButton}
+    direction: DOWN
 - tapOn:
     id: ${output.selectors.editCharacterScreen.saveButton}
 
