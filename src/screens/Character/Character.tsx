@@ -29,7 +29,7 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
     }
 
     navigation.setOptions({
-      title: character.name,
+      title: `${character.name} (${t('Score').toLowerCase()}: ${character.score})`,
       headerRight: () => (
         <IconButton
           icon="pencil"
@@ -38,7 +38,7 @@ export const CharacterScreen = ({ navigation, route }: Props) => {
         />
       ),
     });
-  }, [character, navigation]);
+  }, [character, navigation, t]);
 
   const decreaseWillpower = useCallback(() => {
     if (!character || character.willpower <= 0) {
